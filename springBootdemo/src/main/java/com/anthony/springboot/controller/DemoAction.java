@@ -3,6 +3,8 @@ package com.anthony.springboot.controller;
 import com.anthony.springboot.configbean.GirlConfig;
 import com.anthony.springboot.configbean.UserConfig;
 import com.google.common.collect.Lists;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/demo")
 public class DemoAction {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @Value("${com.demo.name}")
     private String name;
@@ -81,5 +86,16 @@ public class DemoAction {
             sb.append(" -- ");
         });
         return sb.toString();
+    }
+
+    @RequestMapping("/logger")
+    public String logger() {
+        logger.trace("日志输出：{}..", "trance");
+        logger.debug("日志输出：{}..", "debug");
+        logger.info("日志输出：{}..", "info");
+        logger.warn("日志输出：{}..", "warn");
+        logger.error("日志输出：{}..", "error");
+
+        return "logger over~";
     }
 }
