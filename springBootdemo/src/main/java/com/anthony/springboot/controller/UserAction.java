@@ -1,6 +1,7 @@
 package com.anthony.springboot.controller;
 
 import com.anthony.springboot.model.UserModel;
+import com.anthony.springboot.model.UserVO;
 import com.anthony.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +21,14 @@ public class UserAction {
     private UserService userService;
 
     @RequestMapping("/all")
-    public List<UserModel> queryAllUsers() {
-        return userService.queryAllUsers();
+    public List<UserVO> queryAllUsers() {
+//        return userService.queryAllUsers();
+        return userService.queryAll();
     }
 
     @RequestMapping("/getuser")
-    public UserModel queryUserById() {
+    public UserVO queryUserById() {
         Random ran = new Random();
-        return userService.queryUserById(Long.valueOf(ran.nextInt(3) + 1));
+        return userService.queryOneUser(ran.nextInt(3) + 1);
     }
 }
